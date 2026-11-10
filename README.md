@@ -17,7 +17,7 @@ cp env.example .env        # then fill in your database credentials
 docker compose up -d --build
 ```
 
-Open **http://localhost:8080**. The demo page ("Spieltag") uses stubbed data, so it renders even before a database is configured.
+Open **http://localhost:8080**. The bundled demo page uses stubbed data, so it renders even before a database is configured.
 
 Check that the PHP container has the native HTML5 DOM API that xal requires:
 
@@ -34,8 +34,8 @@ The database connection is read from the environment, which `docker/.env` provid
 
 | Variable | Example |
 |---|---|
-| `XAL_DB_DSN` | `mysql:host=db.example.org;port=3306;dbname=tsv;charset=utf8mb4` |
-| `XAL_DB_USER` | `tsv_reader` |
+| `XAL_DB_DSN` | `mysql:host=db.example.org;port=3306;dbname=myapp;charset=utf8mb4` |
+| `XAL_DB_USER` | `app_reader` |
 | `XAL_DB_PASS` | — |
 
 `.env` is git-ignored and must never be committed. The connection is opened lazily, on the first `db()` call.
@@ -53,7 +53,7 @@ The system trades degrees of freedom for guarantees. Every limit is deliberate.
 
 Control attributes use the `xal:` prefix, declared as `xmlns:xal="urn:xal"` on the root element.
 
-**Paths** are binary. A bare name is relative to the context (`mannschaft`, `verein/name`), and a leading `/` is relative to the root (`/seitentitel`). Paths have no `.` or `..`, so there is no access to parent elements. A missing path resolves to `null`.
+**Paths** are binary. A bare name is relative to the context (`title`, `author/name`), and a leading `/` is relative to the root (`/site_name`). Paths have no `.` or `..`, so there is no access to parent elements. A missing path resolves to `null`.
 
 **Directives.** There are exactly four:
 
@@ -67,22 +67,22 @@ Control attributes use the `xal:` prefix, declared as `xmlns:xal="urn:xal"` on t
 **Attribute binding.** Any other `xal:` attribute binds the HTML attribute of the same name (`xal:href="url"` sets `href`). A falsy value drops the attribute, never the element, which also covers boolean attributes such as `disabled`. `xal:class` is the one exception: it *appends* to the existing `class`.
 
 ```html
-<tr xal:foreach="zeilen" xal:class="zone">
-  <td xal:text="platz">1</td>
-  <td><a xal:href="url" xal:text="mannschaft" href="#">SV Riesa</a></td>
-  <td xal:text="punkte">12</td>
+<tr xal:foreach="products" xal:class="status">
+  <td><a xal:href="url" xal:text="name" href="#">Sample product</a></td>
+  <td xal:text="price">9.99</td>
+  <td><input type="checkbox" xal:checked="in_stock" disabled></td>
 </tr>
 ```
 
-The dummy values (`1`, `SV Riesa`, `12`) make the file previewable in a browser. When the template is rendered, real data replaces them.
+The dummy values (`Sample product`, `9.99`) make the file previewable in a browser. When the template is rendered, real data replaces them. `xal:checked` shows a boolean binding: the checkbox is ticked only when `in_stock` is truthy.
 
 ## Composition
 
 | Level | Role | Slot attribute inside | Example |
 |---|---|---|---|
-| **Page** | Invariant skeleton: logo, menus, grid | `xal:region="…"` | `template/tsv/page/standard.html` |
-| **Region** | Composition of a page type | `xal:component="…"` | `template/tsv/region/spieltag.html` |
-| **Component** | Reusable, data-driven building block | none (leaf) | `template/tsv/component/tabelle.html` |
+| **Page** | Invariant skeleton: logo, menus, grid | `xal:region="…"` | Site frame with header, navigation and footer |
+| **Region** | Composition of a page type | `xal:component="…"` | Product detail page, article page |
+| **Component** | Reusable, data-driven building block | none (leaf) | Data table, teaser list, image gallery |
 
 In each template, the `<head>` acts as the asset manifest: the assembler collects only `<link>` stylesheets, deduplicates them and rewrites them to root-absolute URLs. `<style>` blocks are preview-only and are stripped from the output. The `<body>` is the payload that gets injected into the slot. Slot elements belong to the skeleton, so injection replaces only their children.
 
@@ -121,7 +121,7 @@ Each render step runs in its own disposable `Walker` instance, so two components
         ├── page/  region/  component/
 ```
 
-The key rule is **`lib/` = code, `template/` = markup and styles**. `lib/xal/` knows nothing about databases or club data. Everything project-specific lives in `tsv\Region` / `tsv\ContentRegion`.
+The key rule is **`lib/` = code, `template/` = markup and styles**. `lib/xal/` knows nothing about databases or application data. Everything project-specific lives in `tsv\Region` / `tsv\ContentRegion`.
 
 ## Deliberate limits
 
