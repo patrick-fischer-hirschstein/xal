@@ -1,0 +1,89 @@
+/* ============================================================
+   base.css — Site-Vokabular (Muster)
+   Beigetragen von der Page-Ebene. Einzige Ebene mit globalen
+   Klassen: alles hier ist Muster-Vokabular, alles in Baustein-
+   Dateien ist wurzelgescoped (.component-*, .region-*).
+   ============================================================ */
+
+:root {
+  --farbe-tinte: #1c2321;        /* Text */
+  --farbe-rasen: #1d6a3f;        /* Akzent: Spielfeld */
+  --farbe-rasen-dunkel: #14512f;
+  --farbe-linie: #cdd5d0;        /* Trennlinien, Ränder */
+  --farbe-papier: #fafbfa;       /* Hintergrund */
+  --farbe-gedimmt: #5c6660;      /* Nebentext */
+
+  --schrift-text: system-ui, "Segoe UI", Roboto, sans-serif;
+  --schrift-daten: ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --abstand-1: 0.5rem;
+  --abstand-2: 1rem;
+  --abstand-3: 2rem;
+}
+
+body {
+  margin: 0;
+  font-family: var(--schrift-text);
+  color: var(--farbe-tinte);
+  background: var(--farbe-papier);
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------
+   Gerüst: Slot
+   Persistente Klasse auf Slot-Elementen (xal:region /
+   xal:component). Trägt die Container-Query-Basis — Attribut-
+   selektoren dürfen das nicht, sie sterben mit dem Strip.
+   ------------------------------------------------------------ */
+.slot {
+  container-type: inline-size;
+}
+
+/* ------------------------------------------------------------
+   Muster: Einfach-Überschrift
+   <h2 class="titel">…</h2>
+   ------------------------------------------------------------ */
+.titel {
+  margin: 0 0 var(--abstand-2);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-bottom: 3px solid var(--farbe-rasen);
+  padding-bottom: var(--abstand-1);
+}
+
+/* ------------------------------------------------------------
+   Muster: Doppel-Überschrift (Titel + Untertitel)
+   <header class="titel-doppel">
+     <h2>…</h2>
+     <p>…</p>
+   </header>
+   ------------------------------------------------------------ */
+.titel-doppel {
+  margin: 0 0 var(--abstand-2);
+  border-bottom: 3px solid var(--farbe-rasen);
+  padding-bottom: var(--abstand-1);
+}
+.titel-doppel > h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.titel-doppel > p {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: var(--farbe-gedimmt);
+}
+
+/* ------------------------------------------------------------
+   Muster: Hinweis
+   <p class="hinweis">…</p>
+   ------------------------------------------------------------ */
+.hinweis {
+  margin: var(--abstand-2) 0;
+  padding: var(--abstand-1) var(--abstand-2);
+  border-left: 4px solid var(--farbe-rasen);
+  background: #eef4f0;
+  font-size: 0.9rem;
+}

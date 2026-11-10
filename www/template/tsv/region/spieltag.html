@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:xal="urn:xal" lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Region: Spieltag (Standalone-Vorschau)</title>
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="spieltag.css">
+  <style>
+    /* ========================================================
+       NUR VORSCHAU — Style-Blöcke werden nie ausgeliefert.
+       Produktion: siehe spieltag.css.
+       ======================================================== */
+    [xal\:component] {
+      outline: 2px dashed #b8860b;
+      outline-offset: -2px;
+      background:
+        repeating-linear-gradient(45deg,
+          #fbf6e9 0, #fbf6e9 12px, #f6edd6 12px, #f6edd6 24px);
+      min-height: 10rem;
+    }
+    [xal\:component]::before {
+      content: "component: " attr(xal:component);
+      display: block;
+      padding: 0.2rem 0.5rem;
+      font-family: var(--schrift-daten);
+      font-size: 0.72rem;
+      color: #fff;
+      background: #b8860b;
+      width: max-content;
+    }
+    body { padding: 2rem 1rem; max-width: 60rem; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+  <div class="region-spieltag">
+
+    <!-- Zwei Parametrisierungen derselben Component:
+         CSS wird einmal geerntet (Schlüssel = Typ),
+         body zweimal gewalkt und injiziert.
+         Welche IDs (Liga/Pokal) einlaufen, entscheidet die
+         Region-PHP über das spa — nicht das Markup. -->
+
+    <section class="slot" xal:component="tabelle">
+      <p>Vorschau: Tabelle — Parametrisierung 1 (z. B. Liga).</p>
+    </section>
+
+    <section class="slot" xal:component="tabelle">
+      <p>Vorschau: Tabelle — Parametrisierung 2 (z. B. Pokal).</p>
+    </section>
+
+    <section class="slot slot-breit" xal:component="birthdays">
+      <p>Vorschau: Geburtstage der Woche.</p>
+    </section>
+
+  </div>
+
+</body>
+</html>

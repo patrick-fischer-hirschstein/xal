@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:xal="urn:xal" lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Metadaten kommen von der Content-Region (PHP-Rückgabe),
+       die Orchestrierung legt sie unter /meta in die Page-Daten.
+       Statische Werte = Standalone-Vorschau. -->
+  <title xal:text="/meta/titel">Seitentitel (Dummy)</title>
+  <meta name="description" xal:content="/meta/beschreibung" content="Beschreibung (Dummy)">
+  <!-- Relative hrefs: so funktioniert die Datei per file://.
+       Der Assembler rechnet sie beim Zusammenbau wurzelabsolut. -->
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="standard.css">
+  <style>
+    /* ========================================================
+       NUR VORSCHAU — Style-Blöcke werden nie ausgeliefert,
+       der Assembler entfernt sie. Produktion: siehe standard.css.
+       Slot-Färbung, gekoppelt an das Slot-Attribut.
+       ======================================================== */
+    [xal\:region] {
+      outline: 2px dashed #7048b8;
+      outline-offset: -2px;
+      background:
+        repeating-linear-gradient(45deg,
+          #f3eefb 0, #f3eefb 12px, #ebe2f8 12px, #ebe2f8 24px);
+      min-height: 4rem;
+    }
+    [xal\:region]::before {
+      content: "region: " attr(xal:region);
+      display: block;
+      padding: 0.2rem 0.5rem;
+      font-family: var(--schrift-daten);
+      font-size: 0.72rem;
+      color: #fff;
+      background: #7048b8;
+      width: max-content;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="page-kopf slot" xal:region="header">
+      <!-- Dummy-Inhalt: wird bei der Injektion ersetzt,
+           das Slot-Element selbst bleibt stehen. -->
+      <p>Vorschau: Hier injiziert der Assembler die Header-Region
+         (Logo, Hauptmenü).</p>
+    </header>
+
+    <main class="slot" xal:region="content">
+      <p>Vorschau: Hier injiziert der Assembler die Content-Region
+         des jeweiligen Seitentyps.</p>
+    </main>
+
+  </div>
+
+</body>
+</html>

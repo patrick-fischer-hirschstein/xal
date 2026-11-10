@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:xal="urn:xal" lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Component: Tabelle (Standalone-Vorschau)</title>
+  <!-- head = Asset-Manifest dieser Component (wird geerntet).
+       base.css: nach der Normalisierung derselbe Pfad wie in der
+       Page → der Assembler dedupliziert. -->
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="tabelle.css">
+  <style>
+    /* NUR VORSCHAU — Style-Blöcke werden nie ausgeliefert. */
+    body {
+      padding: 2rem 1rem;
+      max-width: 34rem;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Wurzelelement mit Typ-Klasse (Wurzelselektor-Konvention).
+       Component = Blatt: keine Slot-Attribute, nur Datenbindung.
+       Datenkontext (Wurzel) wird von der Region gepusht. -->
+  <div class="component-tabelle">
+
+    <header class="titel-doppel">
+      <h2 xal:text="titel">Tabelle (Dummy)</h2>
+      <p xal:text="untertitel?">Kreisoberliga · Saison 2026/27</p>
+    </header>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Mannschaft</th>
+          <th class="zahl spalte-detail">Sp</th>
+          <th class="zahl spalte-detail">Diff</th>
+          <th class="zahl">Pkt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Produktive Zeile: xal:foreach schiebt den Cursor
+             über /zeilen; darunter alles kontextrelativ.
+             xal:class ergänzt additiv (zone-auf / zone-ab). -->
+        <tr xal:foreach="zeilen" xal:class="zone">
+          <td class="zahl" xal:text="platz">1</td>
+          <td><a xal:href="url" xal:text="mannschaft"
+                 href="#">SV Riesa</a></td>
+          <td class="zahl spalte-detail" xal:text="spiele">4</td>
+          <td class="zahl spalte-detail" xal:text="differenz">+7</td>
+          <td class="zahl" xal:text="punkte">12</td>
+        </tr>
+
+        <!-- Vorschau-Zeilen: xal:remove — im Browser sichtbar,
+             beim Walk entfernt. Boolesch per Anwesenheit. -->
+        <tr xal:remove>
+          <td class="zahl">2</td>
+          <td><a href="#">TSV Gröditz</a></td>
+          <td class="zahl spalte-detail">4</td>
+          <td class="zahl spalte-detail">+4</td>
+          <td class="zahl">9</td>
+        </tr>
+        <tr xal:remove>
+          <td class="zahl">3</td>
+          <td><a href="#">SC Nünchritz</a></td>
+          <td class="zahl spalte-detail">4</td>
+          <td class="zahl spalte-detail">−1</td>
+          <td class="zahl">6</td>
+        </tr>
+        <tr xal:remove class="zone-ab">
+          <td class="zahl">4</td>
+          <td><a href="#">BSG Stahl Nord</a></td>
+          <td class="zahl spalte-detail">4</td>
+          <td class="zahl spalte-detail">−10</td>
+          <td class="zahl">1</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="hinweis" xal:text="hinweis">
+      Wertung des Spiels gegen Gröditz unter Vorbehalt.
+    </p>
+
+  </div>
+
+</body>
+</html>

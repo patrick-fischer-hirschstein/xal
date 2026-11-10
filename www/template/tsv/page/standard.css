@@ -1,0 +1,16 @@
+/* ============================================================
+   standard.css — Produktions-Layout der Page (Site-Chrome).
+   Nur CSS-Dateien werden geerntet bzw. verlinkt ausgeliefert;
+   Style-Blöcke in den Vorlagen sind reine Vorschau.
+   ============================================================ */
+
+.page {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.page-kopf {
+  border-bottom: 3px solid var(--farbe-rasen);
+  margin-bottom: 2rem;
+}

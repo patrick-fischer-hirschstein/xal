@@ -1,0 +1,19 @@
+/* ============================================================
+   spieltag.css — Produktions-Layout der Region.
+   Wurzelgescoped; nur persistente Klassen (nie Attributselektoren).
+   ============================================================ */
+
+.region-spieltag {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 44rem) {
+  .region-spieltag {
+    grid-template-columns: 1fr 1fr;
+  }
+  .region-spieltag > .slot-breit {
+    grid-column: 1 / -1;
+  }
+}

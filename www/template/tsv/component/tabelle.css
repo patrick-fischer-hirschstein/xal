@@ -1,0 +1,60 @@
+/* ============================================================
+   tabelle.css — Asset der Component "tabelle".
+   Wurzelselektor-Konvention: alles unter .component-tabelle.
+   Wird pro Typ geerntet (einmal), auch bei Mehrfachvorkommen.
+   ============================================================ */
+
+.component-tabelle table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.component-tabelle th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--farbe-gedimmt);
+  border-bottom: 2px solid var(--farbe-linie);
+  padding: 0.35rem 0.5rem;
+}
+
+.component-tabelle td {
+  border-bottom: 1px solid var(--farbe-linie);
+  padding: 0.4rem 0.5rem;
+}
+
+.component-tabelle .zahl {
+  text-align: right;
+  font-family: var(--schrift-daten);
+  font-variant-numeric: tabular-nums;
+}
+
+.component-tabelle a {
+  color: inherit;
+  text-decoration: none;
+}
+.component-tabelle a:hover {
+  color: var(--farbe-rasen-dunkel);
+  text-decoration: underline;
+}
+
+/* Zonen-Markierung — Klassen kommen additiv via xal:class */
+.component-tabelle .zone-auf td:first-child {
+  box-shadow: inset 3px 0 0 var(--farbe-rasen);
+}
+.component-tabelle .zone-ab td:first-child {
+  box-shadow: inset 3px 0 0 #a33;
+}
+
+/* ------------------------------------------------------------
+   Container Query: Die Component kennt ihre Einbettungsbreite
+   nicht — sie reagiert auf ihren Container (den Slot), nicht
+   auf den Viewport. Unter 26rem fallen Detailspalten weg.
+   ------------------------------------------------------------ */
+@container (max-width: 26rem) {
+  .component-tabelle .spalte-detail {
+    display: none;
+  }
+}

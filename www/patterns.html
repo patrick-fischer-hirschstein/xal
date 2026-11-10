@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muster-Katalog — Site-Vokabular</title>
+  <link rel="stylesheet" href="template/tsv/base.css">
+  <style>
+    /* Nur Katalog-Chrome — diese Datei wird nie assembliert. */
+    body { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+    .katalog-kopf { margin-bottom: 3rem; }
+    .katalog-kopf h1 { margin: 0; font-size: 1.6rem; }
+    .katalog-kopf p { margin: 0.3rem 0 0; color: var(--farbe-gedimmt); }
+    .muster { margin: 0 0 3rem; }
+    .muster > h3 {
+      margin: 0 0 1rem;
+      font-family: var(--schrift-daten);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--farbe-gedimmt);
+    }
+    .muster-demo {
+      border: 1px solid var(--farbe-linie);
+      border-radius: 4px;
+      padding: 1.25rem;
+      background: #fff;
+    }
+    .muster pre {
+      margin: 0.75rem 0 0;
+      padding: 0.75rem 1rem;
+      background: #f0f2f1;
+      border-radius: 4px;
+      font-family: var(--schrift-daten);
+      font-size: 0.78rem;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="katalog-kopf">
+    <h1>Muster-Katalog</h1>
+    <p>Site-Vokabular unterhalb der Component-Schwelle: Markup-Idiom + base.css.
+       Verwendung per Kopie. Diese Datei wird nie assembliert.</p>
+  </header>
+
+  <section class="muster">
+    <h3>titel — Einfach-Überschrift</h3>
+    <div class="muster-demo">
+      <h2 class="titel">Spielberichte</h2>
+    </div>
+    <pre>&lt;h2 class="titel"&gt;Spielberichte&lt;/h2&gt;</pre>
+  </section>
+
+  <section class="muster">
+    <h3>titel-doppel — Doppel-Überschrift</h3>
+    <div class="muster-demo">
+      <header class="titel-doppel">
+        <h2>Tabelle</h2>
+        <p>Kreisoberliga · Saison 2026/27</p>
+      </header>
+    </div>
+    <pre>&lt;header class="titel-doppel"&gt;
+  &lt;h2&gt;Tabelle&lt;/h2&gt;
+  &lt;p&gt;Kreisoberliga · Saison 2026/27&lt;/p&gt;
+&lt;/header&gt;</pre>
+  </section>
+
+  <section class="muster">
+    <h3>hinweis</h3>
+    <div class="muster-demo">
+      <p class="hinweis">Der Spielplan wird nach der Staffeltagung aktualisiert.</p>
+    </div>
+    <pre>&lt;p class="hinweis"&gt;…&lt;/p&gt;</pre>
+  </section>
+
+</body>
+</html>

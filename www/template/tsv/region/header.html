@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:xal="urn:xal" lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Region: Header (Standalone-Vorschau)</title>
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="header.css">
+  <style>
+    /* NUR VORSCHAU — Style-Blöcke werden nie ausgeliefert. */
+    body { padding: 2rem 1rem; max-width: 60rem; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+  <!-- Region ohne Component-Slots: Das Hauptmenü ist genuiner
+       Region-Inhalt (fällt durch den Component-Test, ADR 0002)
+       und bindet direkt gegen die Region-Daten. -->
+  <div class="region-header">
+
+    <p class="marke" xal:text="verein">SV Riesa</p>
+
+    <nav aria-label="Hauptmenü">
+      <ul>
+        <li xal:foreach="navigation">
+          <a xal:href="url" xal:text="text" xal:class="aktiv"
+             href="/spieltag" class="aktiv">Spieltag</a>
+        </li>
+        <!-- Vorschau-Einträge: xal:remove — beim Walk entfernt -->
+        <li xal:remove><a href="#">Start</a></li>
+        <li xal:remove><a href="#">Spielberichte</a></li>
+        <li xal:remove><a href="#">Verein</a></li>
+      </ul>
+    </nav>
+
+  </div>
+
+</body>
+</html>
